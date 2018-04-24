@@ -1,0 +1,113 @@
+:host {
+  display: flex;
+  align-items: center;
+}
+
+.signal {
+  border-radius: 4px;
+  background-color: black;
+  padding: 10px;
+  font-family: sans-serif;
+  margin-right: 20px;
+  color: grey;
+}
+
+.signal div {
+  padding: 10px;
+  border-radius: 3px;
+  border: 1px solid #333;
+  border-bottom-color: transparent;
+}
+
+.stop.lit {
+  color: red;
+}
+.go.lit {
+  color: green;
+}
+
+.stop.flashing {
+  color: red;
+  animation: flash 1s steps(1) infinite;
+}
+@keyframes flash {
+  50% {
+    color: grey;
+  }
+}
+
+.box {
+  --width: 60px;
+  background-color: black;
+  width: var(--width);
+  height: calc(var(--width) * 2);
+  border-radius: calc(var(--width) / 2);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.button {
+  --diameter: calc(var(--width) * .4);
+  width: var(--diameter);
+  height: var(--diameter);
+  margin: calc((var(--width) - var(--diameter)) / 2);
+  border-radius: 50%;
+  background-color: silver;
+  box-shadow: 0 3px white inset,
+              0 3px black;
+  transform: rotate(45deg);
+}
+.button:active {
+  box-shadow: 0 3px black inset,
+    0 3px white;
+  outline: none;
+}
+.button:focus {
+  outline: none;
+}
+
+.light {
+  --diameter: calc(var(--width) * .2);
+  width: var(--diameter);
+  height: var(--diameter);
+  background-color: white;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 5px;
+}
+
+.light.lit {
+  background-color: pink;
+}
+
+.box::before {
+  content: '';
+  display: block;
+  --diameter: calc(var(--width) * .6);
+  width: var(--diameter);
+  height: var(--diameter);
+  background-color: lightgrey;
+  position: absolute;
+  bottom: calc((var(--width) - var(--diameter)) / 2);
+  right: calc((var(--width) - var(--diameter)) / 2);
+  border-radius: 50%;
+}
+
+.box::after {
+  content: '⇪';
+  color: white;
+  background-color: darkblue;
+  display: block;
+  --diameter: calc(var(--width) * .8);
+  width: var(--diameter);
+  height: var(--diameter);
+  border-radius: 50%;
+  position: absolute;
+  font-size: calc(var(--diameter) * .8);
+  top: calc((var(--width) - var(--diameter)) / 2);
+  right: calc((var(--width) - var(--diameter)) / 2);
+  text-align: center;
+}

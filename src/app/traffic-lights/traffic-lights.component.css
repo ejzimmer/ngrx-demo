@@ -1,0 +1,32 @@
+.lights {
+  background: black;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  width: 40px;
+}
+
+.light {
+  border: 0;
+  background-color: grey;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  box-shadow: 0 4px black inset;
+  border-top: 1px solid #444;
+}
+
+.light:not(last-child) {
+  margin-bottom: 10px;
+}
+
+.light:first-child.lit {
+  background-color: red;
+}
+.light:nth-child(2).lit {
+  background-color: orange;
+}
+.light:last-child.lit {
+  background-color: green;
+}

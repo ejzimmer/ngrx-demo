@@ -1,0 +1,8 @@
+<div class="signal">
+  <div class="stop" [ngClass]="{ lit: state === 'stop', flashing: state == 'stopping' }">DON'T WALK</div>
+  <div class="go" [ngClass]="{ lit: state === 'walk' }">WALK</div>
+</div>
+<div class="box">
+  <div class="light" [ngClass]="{ lit: light }"></div>
+  <button class="button" (click)="pressButton()"></button>
+</div>
