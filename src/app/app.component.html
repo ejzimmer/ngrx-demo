@@ -1,12 +1,29 @@
-<button (click)="startSync()">Subscribe to Sync Observer</button>
-<button (click)="startAsync()">Subscribe to Async Observer</button>
-<button (click)="unsubscribe()">Unsubscribe</button>
+<pre>
+Observable.from([1, 2, 3, 4]).forEach(val => console.log(val));
+</pre>
+<button (click)="forEach()">Subscribe</button>
+<pre>
+Observable.from(1, 2, 3, 4).filter(val => val % 2).forEach(val => console.log(val);
+</pre>
+<button (click)="filter()">Subscribe</button>
+
+<pre>
+Observable.interval(1000).subscribe(x => this.number = x);
+// {{ numbers | async }}
+</pre>
+<button (click)="push()">Subscribe</button>
+
+<div style="margin-bottom: 30px">
+  <button style="margin-bottom: 0" (click)="trackClicks()">Track click events</button>
+  <pre *ngIf="position | async as pos">// {{ pos.x }}, {{ pos.y }}</pre>
+</div>
+
 <form #form="ngForm">
-  <input [(ngModel)]="amiibo.name" name="amiibo"/>
+  <pre>HttpClient.get(request).subscribe(...)</pre>
+  <input style="padding: 10px" [(ngModel)]="amiibo.name" name="amiibo"/>
   <button (click)="getAmiibo()">Get Amiibo</button>
   <img *ngIf="url" [src]="url" />
 </form>
-<button id="clicker">Track click event</button>
 <div style="display: flex; margin-top: 20px;">
   <app-traffic-lights style="margin-right: 10px"></app-traffic-lights>
   <app-pedestrian-light></app-pedestrian-light>

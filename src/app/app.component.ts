@@ -7,13 +7,15 @@ import 'rxjs/add/observable/interval';
 import { OnInit } from '@angular/core/src/metadata/lifecycle_hooks';
 import { Store } from '@ngrx/store';
 import { IntersectionState } from './intersection-reducer';
+import 'rxjs/add/operator/filter';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent {
   values = [1, 2, 3, 4];
   syncObservable = Observable.from(this.values);
   asyncObservable = Observable.interval(1000);
@@ -21,26 +23,30 @@ export class AppComponent implements OnInit{
   amiibo = { name: '' };
   url: string;
   intersection: Observable<IntersectionState>;
+  result: any;
+  numbers = new Subject<number>();
+  position = new Subject<{x: number, y: number}>();
 
   constructor(private http: HttpClient, private store: Store<{ intersection: IntersectionState }>) {
     this.intersection = this.store.select('intersection');
   }
 
-  ngOnInit() {
-    Observable.fromEvent(document.getElementById('clicker'), 'click')
-      .subscribe((event: any) => console.log(`${event.target} was clicked!`));
+  forEach() {
+    this.syncObservable.forEach(val => console.log(val));
+  }
+  filter() {
+    Observable.from(this.values)
+      .filter(val => val % 2 === 0)
+      .forEach(val => console.log(val));
   }
 
-  startSync() {
-    console.log('start sync');
-    this.syncObservable.subscribe(x => console.log(x));
-    console.log('end sync');    
+  push() { 
+    this.asyncObservable.subscribe(x => this.numbers.next(x));
   }
 
-  startAsync() {
-    console.log('start async');
-    this.subscription = this.asyncObservable.subscribe(x => console.log(x));
-    console.log('end async');
+  trackClicks() {
+    Observable.fromEvent(document, 'click')
+      .subscribe((event: any) => this.position.next({x: event.clientX, y: event.clientY}));
   }
 
   getAmiibo() {
@@ -48,7 +54,4 @@ export class AppComponent implements OnInit{
       .subscribe((response: any) => this.url = response.amiibo[0].image);
   }
 
-  unsubscribe() {
-    this.subscription.unsubscribe();
-  }
 }

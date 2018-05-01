@@ -1,0 +1,24 @@
+button {
+  cursor: pointer;
+  background: hsl(215, 100%, 50%);
+  color: white;
+  border: 1px solid #666;
+  border-radius: 2px;
+  box-shadow: 2px 2px 4px #ccc,
+              0 -2px 2px hsl(215, 80%, 38%) inset,
+              0 2px 2px hsl(215, 80%, 80%) inset;
+  margin: auto;
+  margin-bottom: 30px;
+  padding: 10px;
+  font-size: 1em;
+}
+button:active {
+  outline: none;
+  box-shadow: 0 -2px 2px hsl(215, 80%, 80%) inset,
+              0 2px 2px hsl(215, 80%, 38%) inset;
+}
+
+pre {
+  font-family: Courier New; 
+  font-weight: bold;
+}
